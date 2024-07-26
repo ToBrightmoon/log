@@ -4,4 +4,6 @@ project(easy_log)
 
 include_directories(${PROJECT_SOURCE_DIR}/base)
 
-add_executable(main main.cpp)
+include_directories(${PROJECT_SOURCE_DIR}/log)
+
+add_executable(buffer_test test/buffer_test.cpp)

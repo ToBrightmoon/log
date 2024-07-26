@@ -1,6 +1,4 @@
-//
-// Created by chengzhao on 2024/7/25.
-//
+
 #include "message_buffer.hpp"
 
 #include <iostream>
