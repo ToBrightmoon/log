@@ -13,7 +13,7 @@ MessageFormatterBase::MessageFormatterBase(Log::LogLevel level, const std::strin
     level_ = level;
 }
 
-std::string MessageFormatterBase::format()
+std::string MessageFormatterBase::format() const
 {
     std::ostringstream oss;
     auto now = std::chrono::system_clock::now();
@@ -23,9 +23,9 @@ std::string MessageFormatterBase::format()
     std::tm* now_tm = std::localtime(&now_time);
 
     oss << "[" << std::put_time(now_tm, "%Y:%m:%d:%H:%M:%S") << "]"
-        << "[" << getLevelString(level_) << "] "
-        << "[" << file_ << ":" << line_ << "] "
-        << message_ << "\n";
+        << "[" << getLevelString(level_) << "]"
+        << "[" << file_ << ":" << line_ << "]"
+        << "[" << message_  << "]" << "\n";
 
     return oss.str();
 }

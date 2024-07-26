@@ -14,7 +14,7 @@ namespace Log
 
             explicit MessageFormatterBase(LogLevel,const std::string&,const std::string&,int);
 
-            std::string format() override;
+            std::string format() const override;
 
         private:
 

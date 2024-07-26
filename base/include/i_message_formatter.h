@@ -13,13 +13,15 @@ namespace Log
         class IMessageFormatter
         {
         public:
-            virtual std::string format();
+            IMessageFormatter() = default;
+
+            virtual std::string format() const = 0;
 
             virtual ~IMessageFormatter() = default;
 
         protected:
 
-            std::string getLevelString(LogLevel);
+            std::string getLevelString(LogLevel) const ;
         };
     }
 }

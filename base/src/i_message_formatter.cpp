@@ -3,7 +3,7 @@
 using namespace Log;
 using namespace Log::Base;
 
-std::string IMessageFormatter::getLevelString(Log::LogLevel level)
+std::string IMessageFormatter::getLevelString(Log::LogLevel level) const
 {
     switch (level)
     {
