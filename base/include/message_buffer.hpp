@@ -25,6 +25,11 @@ namespace Log
                 return size() == Capacity;
             }
 
+            [[nodiscard]] bool empty() const noexcept
+            {
+                return size() == 0;
+            }
+
             [[nodiscard]] int size() const noexcept
             {
                 return curr_size_;
@@ -47,10 +52,20 @@ namespace Log
                 return buffer_.size();
             }
 
-            void transData(Buffer_T& other) noexcept
+            bool transData(Buffer_T& other) noexcept
             {
-                std::move(other.begin(),other.end(),this->begin());
-                other.clear();
+                if(other.isFull())
+                {
+                    std::move(other.begin(),other.end(),this->begin());
+                    other.clear();
+                    curr_size_ = Capacity;
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+
             }
 
             const T& operator[](int index) const
