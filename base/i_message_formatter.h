@@ -19,7 +19,7 @@ namespace Log
 
         protected:
 
-            std::string getLevel(LogLevel);
+            std::string getLevelString(LogLevel);
         };
     }
 }
