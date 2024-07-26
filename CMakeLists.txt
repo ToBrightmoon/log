@@ -10,8 +10,12 @@ include_directories(${PROJECT_SOURCE_DIR}/base/include)
 
 include_directories(${PROJECT_SOURCE_DIR}/log/include)
 
-add_subdirectory(${PROJECT_SOURCE_DIR}/base/src)
+add_subdirectory(${PROJECT_SOURCE_DIR}/base)
 
-include_directories(${PROJECT_SOURCE_DIR}/log/src)
+include_directories(${PROJECT_SOURCE_DIR}/log)
 
 add_executable(buffer_test test/buffer_test.cpp)
+
+add_executable(formatter_test test/formatter_test.cpp)
+
+target_link_libraries(formatter_test BASE_LIB)
