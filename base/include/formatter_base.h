@@ -14,7 +14,9 @@ namespace Log
 
             explicit MessageFormatterBase(LogLevel,const std::string&,const std::string&,int);
 
-            std::string format() const override;
+            [[nodiscard]] std::string format() const noexcept override;
+
+            LogLevel getLogLevel() const  noexcept override;
 
         private:
 

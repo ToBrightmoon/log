@@ -15,7 +15,9 @@ namespace Log
         public:
             IMessageFormatter() = default;
 
-            virtual std::string format() const = 0;
+            [[nodiscard]] virtual std::string format() const noexcept = 0;
+
+            [[nodiscard]] virtual LogLevel getLogLevel() const noexcept = 0;
 
             virtual ~IMessageFormatter() = default;
 

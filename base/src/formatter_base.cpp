@@ -13,7 +13,7 @@ MessageFormatterBase::MessageFormatterBase(Log::LogLevel level, const std::strin
     level_ = level;
 }
 
-std::string MessageFormatterBase::format() const
+std::string MessageFormatterBase::format() const noexcept
 {
     std::ostringstream oss;
     auto now = std::chrono::system_clock::now();
@@ -28,4 +28,9 @@ std::string MessageFormatterBase::format() const
         << "[" << message_  << "]" << "\n";
 
     return oss.str();
+}
+
+LogLevel MessageFormatterBase::getLogLevel() const noexcept
+{
+    return level_;
 }
