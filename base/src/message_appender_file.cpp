@@ -12,6 +12,8 @@ MessageAppenderFile::MessageAppenderFile(const std::string &fileName):fileName_(
 
 bool MessageAppenderFile::init()
 {
+    if(isStart_) return isStart_;
+
     std::filesystem::path filepath(fileName_);
     std::filesystem::path dir = filepath.parent_path();
 

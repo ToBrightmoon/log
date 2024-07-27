@@ -14,7 +14,7 @@ namespace Log::Base
 
         [[nodiscard]] std::string format() const noexcept override;
 
-        LogLevel getLogLevel() const  noexcept override;
+        [[nodiscard]] LogLevel getLogLevel() const  noexcept override;
 
     private:
 
@@ -27,7 +27,5 @@ namespace Log::Base
         int line_;
     };
 }
-
-
 
 #endif //EASY_LOG_FORMATTER_BASE_H
