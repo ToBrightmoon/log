@@ -5,29 +5,28 @@
 
 #include "i_message_appender.h"
 
-namespace Log
+namespace Log::Base
 {
-    namespace Base
+    class MessageAppenderFile : public IMessageAppender
     {
-        class MessageAppenderFile : public IMessageAppender
-        {
-        public:
-            explicit MessageAppenderFile(const std::string& filename);
+    public:
+        explicit MessageAppenderFile(const std::string& filename);
 
-            bool init() override;
+        bool init() override;
 
-            bool append(const std::string &)  override;
+        bool append(const std::string &)  override;
 
-            ~MessageAppenderFile() override;
+        ~MessageAppenderFile() override;
 
-        private:
-            bool isStart_ = false;
+    private:
+        bool isStart_ = false;
 
-            std::string fileName_;
+        std::string fileName_;
 
-            std::ofstream logFile_;
-        };
-    }
+        std::ofstream logFile_;
+    };
 }
+
+
 
 #endif

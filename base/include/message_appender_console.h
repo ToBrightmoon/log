@@ -4,25 +4,22 @@
 
 #include "i_message_appender.h"
 
-namespace Log
+namespace Log::Base
 {
-    namespace Base
+    class MessageAppenderConsole : public IMessageAppender
     {
-        class MessageAppenderConsole : public IMessageAppender
-        {
-        public:
-            MessageAppenderConsole() = default;
+    public:
+        MessageAppenderConsole() = default;
 
-            ~MessageAppenderConsole() override = default;
+        ~MessageAppenderConsole() override = default;
 
-            [[nodiscard]] bool append(const std::string &) override;
+        [[nodiscard]] bool append(const std::string &) override;
 
-            bool init() override;
+        bool init() override;
 
-        private:
-            bool isStart_ = false;
-        };
-    }
-};
+    private:
+        bool isStart_ = false;
+    };
+}
 
 #endif //EASY_LOG_MESSAGE_APPENDER_CONSOLE_H

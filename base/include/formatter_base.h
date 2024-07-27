@@ -4,31 +4,30 @@
 
 #include "i_message_formatter.h"
 
-namespace Log
+namespace Log::Base
 {
-    namespace Base
+    class MessageFormatterBase : public IMessageFormatter
     {
-        class MessageFormatterBase : public IMessageFormatter
-        {
-        public:
+    public:
 
-            explicit MessageFormatterBase(LogLevel,const std::string&,const std::string&,int);
+        explicit MessageFormatterBase(LogLevel,const std::string&,const std::string&,int);
 
-            [[nodiscard]] std::string format() const noexcept override;
+        [[nodiscard]] std::string format() const noexcept override;
 
-            LogLevel getLogLevel() const  noexcept override;
+        LogLevel getLogLevel() const  noexcept override;
 
-        private:
+    private:
 
-            LogLevel level_;
+        LogLevel level_;
 
-            std::string message_;
+        std::string message_;
 
-            std::string file_;
+        std::string file_;
 
-            int line_;
-        };
-    }
+        int line_;
+    };
 }
+
+
 
 #endif //EASY_LOG_FORMATTER_BASE_H

@@ -6,26 +6,24 @@
 
 #include "log_level.h"
 
-namespace Log
+namespace Log::Base
 {
-    namespace Base
+    class IMessageFormatter
     {
-        class IMessageFormatter
-        {
-        public:
-            IMessageFormatter() = default;
+    public:
+        IMessageFormatter() = default;
 
-            [[nodiscard]] virtual std::string format() const noexcept = 0;
+        [[nodiscard]] virtual std::string format() const noexcept = 0;
 
-            [[nodiscard]] virtual LogLevel getLogLevel() const noexcept = 0;
+        [[nodiscard]] virtual LogLevel getLogLevel() const noexcept = 0;
 
-            virtual ~IMessageFormatter() = default;
+        virtual ~IMessageFormatter() = default;
 
-        protected:
+    protected:
 
-            std::string getLevelString(LogLevel) const ;
-        };
-    }
+        [[nodiscard]] std::string getLevelString(LogLevel) const ;
+    };
 }
+
 
 #endif //EASY_LOG_I_MESSAGE_FORMAT_H

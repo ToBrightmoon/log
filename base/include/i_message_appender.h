@@ -6,22 +6,20 @@
 
 #include "nocopyable.h"
 
-namespace Log
+namespace Log::Base
 {
-    namespace Base
+    class IMessageAppender : NoCopyAbled
     {
-        class IMessageAppender : NoCopyAbled
-        {
-        public:
-            IMessageAppender() = default;
+    public:
+        IMessageAppender() = default;
 
-            virtual bool init() = 0;
+        virtual bool init() = 0;
 
-            virtual ~IMessageAppender() = default;
+        virtual ~IMessageAppender() = default;
 
-            [[nodiscard]] virtual bool append(const std::string&)  = 0;
-        };
-    }
+        [[nodiscard]] virtual bool append(const std::string&)  = 0;
+    };
 }
+
 
 #endif //EASY_LOG_I_MESSAGE_APPENDER_H

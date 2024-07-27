@@ -7,100 +7,97 @@
 
 #include "nocopyable.h"
 
-namespace Log
+namespace Log::Base
 {
-    namespace Base
+    template <class T,std::size_t Capacity>
+    class Buffer : NoCopyAbled
     {
-        template <class T,std::size_t Capacity>
-        class Buffer : NoCopyAbled
+        using Buffer_T = Buffer<T,Capacity>;
+        using BufferIterator = typename std::array<T,Capacity>::iterator;
+
+    public:
+        explicit Buffer() = default;
+
+        [[nodiscard]] bool isFull() const noexcept
         {
-            using Buffer_T = Buffer<T,Capacity>;
-            using BufferIterator = typename std::array<T,Capacity>::iterator;
+            return size() == Capacity;
+        }
 
-        public:
-            explicit Buffer() = default;
+        [[nodiscard]] bool empty() const noexcept
+        {
+            return size() == 0;
+        }
 
-            [[nodiscard]] bool isFull() const noexcept
+        [[nodiscard]] int size() const noexcept
+        {
+            return curr_size_;
+            ;           }
+
+        bool add(const T& element) noexcept
+        {
+            if(isFull())
             {
-                return size() == Capacity;
+                return false;
+            }else
+            {
+                buffer_.at(curr_size_++) = element;
+                return true;
+            }
+        }
+
+        [[nodiscard]] int maxCapacity() const noexcept
+        {
+            return buffer_.size();
+        }
+
+        bool transData(Buffer_T& other) noexcept
+        {
+            if(other.isFull())
+            {
+                std::move(other.begin(),other.end(),this->begin());
+                other.clear();
+                curr_size_ = Capacity;
+                return true;
+            }
+            else
+            {
+                return false;
             }
 
-            [[nodiscard]] bool empty() const noexcept
-            {
-                return size() == 0;
-            }
+        }
 
-            [[nodiscard]] int size() const noexcept
-            {
-                return curr_size_;
-;           }
+        const T& operator[](int index) const
+        {
+            return buffer_[index];
+        }
 
-            bool add(const T& element) noexcept
-            {
-                if(isFull())
-                {
-                    return false;
-                }else
-                {
-                    buffer_.at(curr_size_++) = element;
-                    return true;
-                }
-            }
+        const T& at(int index) const noexcept
+        {
+            return buffer_.at(index);
+        }
 
-            [[nodiscard]] int maxCapacity() const noexcept
-            {
-                return buffer_.size();
-            }
+    private:
 
-            bool transData(Buffer_T& other) noexcept
-            {
-                if(other.isFull())
-                {
-                    std::move(other.begin(),other.end(),this->begin());
-                    other.clear();
-                    curr_size_ = Capacity;
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
+        BufferIterator begin() noexcept
+        {
+            return buffer_.begin();
+        }
 
-            }
+        BufferIterator end() noexcept
+        {
+            return buffer_.end();
+        }
 
-            const T& operator[](int index) const
-            {
-                return buffer_[index];
-            }
+        void clear()
+        {
+            buffer_.fill(T());
+            curr_size_ = 0;
+        }
 
-            const T& at(int index) const noexcept
-            {
-               return buffer_.at(index);
-            }
-
-        private:
-
-            BufferIterator begin() noexcept
-            {
-                return buffer_.begin();
-            }
-
-            BufferIterator end() noexcept
-            {
-                return buffer_.end();
-            }
-
-            void clear()
-            {
-                buffer_.fill(T());
-                curr_size_ = 0;
-            }
-
-        private:
-            int curr_size_ = 0;
-            std::array<T,Capacity> buffer_;
-        };
-    }
+    private:
+        int curr_size_ = 0;
+        std::array<T,Capacity> buffer_;
+    };
 }
 
 #endif
