@@ -2,6 +2,8 @@
 #ifndef EASY_LOG_LOG_MESSAGE_H
 #define EASY_LOG_LOG_MESSAGE_H
 
+#include <memory>
+
 #include "log_level.h"
 #include "i_message_appender.h"
 #include "i_message_formatter.h"
@@ -10,8 +12,12 @@ namespace Log::Base
 {
     class LogMessage : NoCopyAbled
     {
+        using IMessageAppenderPtr =  std::shared_ptr<IMessageAppender>;
+
     public:
-        explicit LogMessage(const IMessageFormatter& formatter,IMessageAppender& appender);
+        LogMessage() = default;
+
+        explicit LogMessage(const IMessageFormatter&, IMessageAppenderPtr appenderPtr);
 
         bool append();
 
@@ -24,11 +30,11 @@ namespace Log::Base
     private:
         [[nodiscard]] LogLevel getLogLevel() const;
 
-        const std::string message_;
+        std::string message_;
 
-        const LogLevel level_;
+        LogLevel level_ = LogLevel::INFO;
 
-        IMessageAppender& appender_;
+        IMessageAppenderPtr appender_ = nullptr;
     };
 }
 

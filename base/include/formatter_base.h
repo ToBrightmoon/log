@@ -9,6 +9,7 @@ namespace Log::Base
     class MessageFormatterBase : public IMessageFormatter
     {
     public:
+        MessageFormatterBase() = default;
 
         explicit MessageFormatterBase(LogLevel,const std::string&,const std::string&,int);
 
@@ -18,13 +19,13 @@ namespace Log::Base
 
     private:
 
-        LogLevel level_;
+        LogLevel level_ = LogLevel::INFO;
 
         std::string message_;
 
         std::string file_;
 
-        int line_;
+        int line_ = 0;
     };
 }
 

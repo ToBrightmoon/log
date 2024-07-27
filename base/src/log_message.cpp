@@ -4,7 +4,7 @@
 using namespace Log;
 using namespace Log::Base;
 
-LogMessage::LogMessage(const Log::Base::IMessageFormatter &formatter, Log::Base::IMessageAppender &appender):
+LogMessage::LogMessage(const Log::Base::IMessageFormatter &formatter, IMessageAppenderPtr appender):
 message_(formatter.format()),level_(formatter.getLogLevel()),appender_(appender)
 {
 
@@ -22,7 +22,10 @@ bool LogMessage::operator<(Log::LogLevel level) const
 
 bool LogMessage::append()
 {
-    return appender_.append(message_);
+    if(appender_ == nullptr)
+    {
+        return appender_->append(message_);
+    }
 }
 
 LogLevel LogMessage::getLogLevel() const

@@ -16,7 +16,7 @@ namespace Log::Base
         using BufferIterator = typename std::array<T,Capacity>::iterator;
 
     public:
-        explicit Buffer() = default;
+        Buffer() = default;
 
         [[nodiscard]] bool isFull() const noexcept
         {
