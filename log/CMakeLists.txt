@@ -1,4 +1,4 @@
 
-file(GLOB LOG_SRC_FILES "src/*.cpp")
+aux_source_directory(./src LOG_SRC_FILES)
 
-add_library(LOG_LIB SHARED ${LOG_SRC_FILES})
+add_library(LOG_LIB STATIC ${LOG_SRC_FILES})

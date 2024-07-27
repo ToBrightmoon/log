@@ -31,7 +31,7 @@ namespace Log::Base
         [[nodiscard]] int size() const noexcept
         {
             return curr_size_;
-            ;           }
+        }
 
         bool add(const T& element) noexcept
         {
@@ -66,12 +66,22 @@ namespace Log::Base
 
         }
 
-        const T& operator[](int index) const
+        T& operator[](int index) noexcept
         {
             return buffer_[index];
         }
 
-        const T& at(int index) const noexcept
+        T& at(int index)  noexcept
+        {
+            return buffer_.at(index);
+        }
+
+        const T& operator[](int index) const noexcept
+        {
+            return buffer_[index];
+        }
+
+        const T& at(int index)  const noexcept
         {
             return buffer_.at(index);
         }
