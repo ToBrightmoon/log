@@ -1,6 +1,3 @@
-//
-// Created by chengzhao on 2024/7/27.
-//
 
 #ifndef EASY_LOG_LOG_ERROR_CODE_H
 #define EASY_LOG_LOG_ERROR_CODE_H

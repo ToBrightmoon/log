@@ -52,18 +52,10 @@ namespace Log::Base
 
         bool transData(Buffer_T& other) noexcept
         {
-            if(other.isFull())
-            {
-                std::move(other.begin(),other.end(),this->begin());
-                other.clear();
-                curr_size_ = Capacity;
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-
+            curr_size_ = other.size();
+            std::move(other.begin(),other.end(),this->begin());
+            other.clear();
+            return true;
         }
 
         T& operator[](int index) noexcept

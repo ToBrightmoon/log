@@ -17,8 +17,18 @@ bool MessageAppenderFile::init()
     std::filesystem::path filepath(fileName_);
     std::filesystem::path dir = filepath.parent_path();
 
-    if (!std::filesystem::exists(dir)) {
-        if (!std::filesystem::create_directories(dir)) {
+
+    if (!std::filesystem::exists(dir))
+    {
+        try
+        {
+            if (!std::filesystem::create_directories(dir))
+            {
+                return false;
+            }
+        }
+        catch (std::exception& e)
+        {
             return false;
         }
     }

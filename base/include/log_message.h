@@ -10,7 +10,7 @@
 
 namespace Log::Base
 {
-    class LogMessage : NoCopyAbled
+    class LogMessage
     {
         using IMessageAppenderPtr =  std::shared_ptr<IMessageAppender>;
 
