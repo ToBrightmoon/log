@@ -24,8 +24,9 @@ bool LogMessage::append()
 {
     if(appender_ == nullptr)
     {
-        return appender_->append(message_);
+        return false;
     }
+    return appender_->append(message_);
 }
 
 LogLevel LogMessage::getLogLevel() const
