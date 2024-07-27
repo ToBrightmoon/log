@@ -19,7 +19,7 @@ namespace Log
 
             virtual ~IMessageAppender() = default;
 
-            [[nodiscard]] virtual bool append(const std::string&) const = 0;
+            [[nodiscard]] virtual bool append(const std::string&)  = 0;
         };
     }
 }

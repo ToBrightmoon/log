@@ -6,7 +6,7 @@
 using namespace Log;
 using namespace Log::Base;
 
-bool MessageAppenderConsole::append(const std::string & message) const
+bool MessageAppenderConsole::append(const std::string & message)
 {
     if(isStart_)
     {

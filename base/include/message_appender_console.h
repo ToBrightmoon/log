@@ -15,12 +15,14 @@ namespace Log
 
             ~MessageAppenderConsole() override = default;
 
-            [[nodiscard]] bool append(const std::string&) const override;
+            [[nodiscard]] bool append(const std::string &) override;
 
             bool init() override;
+
         private:
             bool isStart_ = false;
+        };
     }
-}
+};
 
 #endif //EASY_LOG_MESSAGE_APPENDER_CONSOLE_H
